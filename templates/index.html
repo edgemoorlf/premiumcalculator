@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="title">专业保险费率计算器</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="language-toggle">
+                <button id="languageToggle" class="btn-language" data-i18n="language_toggle">English</button>
+            </div>
+            <h1 data-i18n="title">专业保险费率计算器</h1>
+            <p class="subtitle" data-i18n="subtitle">精算级保费计算与全面核保系统</p>
+        </header>
+
+        <div class="calculator-form">
+            <form id="quoteForm">
+                <!-- Applicant Information -->
+                <div class="section">
+                    <h2 data-i18n="sections.applicant_info">申请人信息</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="name" data-i18n="form_labels.full_name">姓名：</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="age" data-i18n="form_labels.age">年龄：</label>
+                            <input type="number" id="age" name="age" min="18" max="80" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="gender" data-i18n="form_labels.gender">性别：</label>
+                            <select id="gender" name="gender" required>
+                                <option value="male" data-i18n="form_options.gender.male">男</option>
+                                <option value="female" data-i18n="form_options.gender.female">女</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="date_of_birth" data-i18n="form_labels.date_of_birth">出生日期：</label>
+                            <input type="date" id="date_of_birth" name="date_of_birth">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Selection -->
+                <div class="section">
+                    <h2 data-i18n="sections.product_selection">产品选择</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="product_type" data-i18n="form_labels.insurance_product">保险产品：</label>
+                            <select id="product_type" name="product_type" required onchange="toggleProductFields()">
+                                <option value="term_life" data-i18n="form_options.products.term_life">定期寿险</option>
+                                <option value="whole_life" data-i18n="form_options.products.whole_life">终身寿险</option>
+                                <option value="disability_income" data-i18n="form_options.products.disability_income">失能收入保险</option>
+                                <option value="critical_illness" data-i18n="form_options.products.critical_illness">重大疾病保险</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="coverage_amount_group">
+                            <label for="coverage_amount" data-i18n="form_labels.coverage_amount">Coverage Amount ($):</label>
+                            <input type="number" id="coverage_amount" name="coverage_amount" min="25000" max="10000000" step="1000" value="500000">
+                        </div>
+                        <div class="form-group" id="policy_term_group">
+                            <label for="policy_term" data-i18n="form_labels.policy_term">Policy Term (years):</label>
+                            <select id="policy_term" name="policy_term">
+                                <option value="10" data-i18n="form_options.policy_terms.10">10 Years</option>
+                                <option value="15" data-i18n="form_options.policy_terms.15">15 Years</option>
+                                <option value="20" selected data-i18n="form_options.policy_terms.20">20 Years</option>
+                                <option value="25" data-i18n="form_options.policy_terms.25">25 Years</option>
+                                <option value="30" data-i18n="form_options.policy_terms.30">30 Years</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="monthly_benefit_group" style="display: none;">
+                            <label for="monthly_benefit" data-i18n="form_labels.monthly_benefit">Monthly Benefit ($):</label>
+                            <input type="number" id="monthly_benefit" name="monthly_benefit" min="500" max="20000" step="100" value="3000">
+                        </div>
+                        <div class="form-group" id="benefit_period_group" style="display: none;">
+                            <label for="benefit_period" data-i18n="form_labels.benefit_period">Benefit Period:</label>
+                            <select id="benefit_period" name="benefit_period">
+                                <option value="2_years" data-i18n="form_options.benefit_periods.2_years">2 Years</option>
+                                <option value="5_years" data-i18n="form_options.benefit_periods.5_years">5 Years</option>
+                                <option value="10_years" data-i18n="form_options.benefit_periods.10_years">10 Years</option>
+                                <option value="to_age_65" selected data-i18n="form_options.benefit_periods.to_age_65">To Age 65</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="waiting_period_group" style="display: none;">
+                            <label for="waiting_period" data-i18n="form_labels.waiting_period">Waiting Period (days):</label>
+                            <select id="waiting_period" name="waiting_period">
+                                <option value="30" data-i18n="form_options.waiting_periods.30">30 Days</option>
+                                <option value="90" selected data-i18n="form_options.waiting_periods.90">90 Days</option>
+                                <option value="180" data-i18n="form_options.waiting_periods.180">180 Days</option>
+                                <option value="365" data-i18n="form_options.waiting_periods.365">365 Days</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Medical History -->
+                <div class="section">
+                    <h2 data-i18n="sections.medical_history">Medical History</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="height" data-i18n="form_labels.height">Height (inches):</label>
+                            <input type="number" id="height" name="height" min="48" max="96" step="0.5" value="70">
+                        </div>
+                        <div class="form-group">
+                            <label for="weight" data-i18n="form_labels.weight">Weight (lbs):</label>
+                            <input type="number" id="weight" name="weight" min="80" max="400" step="1" value="170">
+                        </div>
+                        <div class="form-group full-width">
+                            <label data-i18n="form_labels.medical_conditions">Medical Conditions (select all that apply):</label>
+                            <div class="checkbox-grid">
+                                <label><input type="checkbox" name="medical_conditions" value="hypertension_controlled"> <span data-i18n="form_options.medical_conditions.hypertension_controlled">Controlled Hypertension</span></label>
+                                <label><input type="checkbox" name="medical_conditions" value="diabetes_type2_controlled"> <span data-i18n="form_options.medical_conditions.diabetes_type2_controlled">Controlled Type 2 Diabetes</span></label>
+                                <label><input type="checkbox" name="medical_conditions" value="asthma_mild"> <span data-i18n="form_options.medical_conditions.asthma_mild">Mild Asthma</span></label>
+                                <label><input type="checkbox" name="medical_conditions" value="depression_treated"> <span data-i18n="form_options.medical_conditions.depression_treated">Treated Depression</span></label>
+                                <label><input type="checkbox" name="medical_conditions" value="heart_disease_mild"> <span data-i18n="form_options.medical_conditions.heart_disease_mild">Mild Heart Disease</span></label>
+                                <label><input type="checkbox" name="medical_conditions" value="obesity_moderate"> <span data-i18n="form_options.medical_conditions.obesity_moderate">Moderate Obesity</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lifestyle Factors -->
+                <div class="section">
+                    <h2 data-i18n="sections.lifestyle_factors">Lifestyle Factors</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="smoking_status" data-i18n="form_labels.smoking_status">Smoking Status:</label>
+                            <select id="smoking_status" name="smoking_status">
+                                <option value="non_smoker" selected data-i18n="form_options.smoking_status.non_smoker">Non-Smoker</option>
+                                <option value="former_smoker_5yr" data-i18n="form_options.smoking_status.former_smoker_5yr">Quit 5+ Years Ago</option>
+                                <option value="former_smoker_2yr" data-i18n="form_options.smoking_status.former_smoker_2yr">Quit 2-5 Years Ago</option>
+                                <option value="former_smoker_1yr" data-i18n="form_options.smoking_status.former_smoker_1yr">Quit Within 1 Year</option>
+                                <option value="current_smoker" data-i18n="form_options.smoking_status.current_smoker">Current Smoker</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="alcohol_use" data-i18n="form_labels.alcohol_use">Alcohol Use:</label>
+                            <select id="alcohol_use" name="alcohol_use">
+                                <option value="moderate_use" selected data-i18n="form_options.alcohol_use.moderate_use">Moderate/Social</option>
+                                <option value="heavy_use" data-i18n="form_options.alcohol_use.heavy_use">Heavy Use</option>
+                                <option value="alcoholism_treated" data-i18n="form_options.alcohol_use.alcoholism_treated">Treated Alcoholism</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <label data-i18n="form_labels.hazardous_activities">Hazardous Activities (select all that apply):</label>
+                            <div class="checkbox-grid">
+                                <label><input type="checkbox" name="hazardous_activities" value="recreational_flying"> <span data-i18n="form_options.hazardous_activities.recreational_flying">Recreational Flying</span></label>
+                                <label><input type="checkbox" name="hazardous_activities" value="mountain_climbing"> <span data-i18n="form_options.hazardous_activities.mountain_climbing">Mountain Climbing</span></label>
+                                <label><input type="checkbox" name="hazardous_activities" value="motorcycle_racing"> <span data-i18n="form_options.hazardous_activities.motorcycle_racing">Motorcycle Racing</span></label>
+                                <label><input type="checkbox" name="hazardous_activities" value="extreme_sports"> <span data-i18n="form_options.hazardous_activities.extreme_sports">Extreme Sports</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Occupation Information -->
+                <div class="section">
+                    <h2 data-i18n="sections.occupation_info">Occupation Information</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="occupation_title" data-i18n="form_labels.job_title">Job Title:</label>
+                            <input type="text" id="occupation_title" name="occupation_title" placeholder="e.g., Software Engineer">
+                        </div>
+                        <div class="form-group">
+                            <label for="occupation_class" data-i18n="form_labels.occupation_class">Occupation Class:</label>
+                            <select id="occupation_class" name="occupation_class">
+                                <option value="1" data-i18n="form_options.occupation_classes.1">Class 1 - Professional (Low Risk)</option>
+                                <option value="2" selected data-i18n="form_options.occupation_classes.2">Class 2 - Standard Professional</option>
+                                <option value="3" data-i18n="form_options.occupation_classes.3">Class 3 - Skilled Manual</option>
+                                <option value="4" data-i18n="form_options.occupation_classes.4">Class 4 - Heavy Manual</option>
+                                <option value="5" data-i18n="form_options.occupation_classes.5">Class 5 - Hazardous</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Financial Information -->
+                <div class="section">
+                    <h2 data-i18n="sections.financial_info">Financial Information</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="annual_income" data-i18n="form_labels.annual_income">Annual Income ($):</label>
+                            <input type="number" id="annual_income" name="annual_income" min="20000" max="10000000" step="1000" value="100000">
+                        </div>
+                        <div class="form-group">
+                            <label for="net_worth" data-i18n="form_labels.net_worth">Net Worth ($):</label>
+                            <input type="number" id="net_worth" name="net_worth" min="0" max="50000000" step="1000" value="200000">
+                        </div>
+                        <div class="form-group">
+                            <label for="total_debt" data-i18n="form_labels.total_debt">Total Debt ($):</label>
+                            <input type="number" id="total_debt" name="total_debt" min="0" max="5000000" step="1000" value="50000">
+                        </div>
+                        <div class="form-group">
+                            <label for="beneficiary" data-i18n="form_labels.primary_beneficiary">Primary Beneficiary:</label>
+                            <input type="text" id="beneficiary" name="beneficiary" placeholder="Spouse, Children, etc.">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary" data-i18n="buttons.generate_quote">生成专业报价</button>
+                    <button type="button" class="btn-secondary" onclick="resetForm()" data-i18n="buttons.reset_form">重置表单</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Results Section -->
+        <div id="results" class="results-section" style="display: none;">
+            <h2 data-i18n="results.quote_results">报价结果</h2>
+            <div id="quote-summary" class="quote-summary"></div>
+            <div id="risk-assessment" class="risk-assessment"></div>
+            <div id="premium-breakdown" class="premium-breakdown"></div>
+            <div id="policy-details" class="policy-details"></div>
+            <div id="underwriter-notes" class="underwriter-notes"></div>
+        </div>
+
+        <!-- Loading Indicator -->
+        <div id="loading" class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p data-i18n="loading">正在计算专业精算报价...</p>
+        </div>
+
+        <!-- Error Display -->
+        <div id="error" class="error-message" style="display: none;"></div>
+    </div>
+
+    <footer class="footer">
+        <p data-i18n="footer.title">专业保险费率计算器 | 精算级计算 | 演示系统</p>
+        <p data-i18n="footer.subtitle">基于行业标准CSO生命表和全面核保方法构建</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='calculator.js') }}"></script>
+</body>
+</html>

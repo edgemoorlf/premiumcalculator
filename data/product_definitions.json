@@ -1,0 +1,90 @@
+{
+  "products": {
+    "term_life": {
+      "name": "Term Life Insurance",
+      "description": "Pure death benefit protection for specified term",
+      "terms": [10, 15, 20, 25, 30],
+      "min_coverage": 50000,
+      "max_coverage": 10000000,
+      "min_age": 18,
+      "max_age": 75,
+      "expense_load": 0.15,
+      "profit_margin": 0.08,
+      "commission": 0.05,
+      "calculation_method": "level_premium_term"
+    },
+    "whole_life": {
+      "name": "Whole Life Insurance", 
+      "description": "Permanent life insurance with cash value accumulation",
+      "min_coverage": 25000,
+      "max_coverage": 5000000,
+      "min_age": 18,
+      "max_age": 65,
+      "expense_load": 0.25,
+      "profit_margin": 0.12,
+      "commission": 0.08,
+      "cash_value_rate": 0.025,
+      "calculation_method": "whole_life_reserve"
+    },
+    "disability_income": {
+      "name": "Disability Income Insurance",
+      "description": "Monthly income replacement for disability",
+      "benefit_periods": ["2_years", "5_years", "10_years", "to_age_65"],
+      "waiting_periods": [30, 90, 180, 365],
+      "min_monthly_benefit": 500,
+      "max_monthly_benefit": 20000,
+      "min_age": 18,
+      "max_age": 60,
+      "expense_load": 0.20,
+      "profit_margin": 0.10,
+      "commission": 0.06,
+      "calculation_method": "disability_present_value"
+    },
+    "critical_illness": {
+      "name": "Critical Illness Insurance",
+      "description": "Lump sum payment upon diagnosis of covered critical illness",
+      "covered_conditions": ["cancer", "heart_disease", "stroke", "kidney_failure", "major_organ_transplant"],
+      "min_coverage": 25000,
+      "max_coverage": 2000000,
+      "min_age": 18,
+      "max_age": 65,
+      "expense_load": 0.18,
+      "profit_margin": 0.09,
+      "commission": 0.07,
+      "calculation_method": "critical_illness_morbidity"
+    }
+  },
+  "regulatory_requirements": {
+    "reserve_factors": {
+      "term_life": 0.02,
+      "whole_life": 0.15,
+      "disability_income": 0.25,
+      "critical_illness": 0.10
+    },
+    "minimum_margins": {
+      "mortality_margin": 0.05,
+      "morbidity_margin": 0.10,
+      "expense_margin": 0.03
+    },
+    "solvency_requirements": {
+      "risk_based_capital": 0.08,
+      "minimum_surplus": 0.05
+    }
+  },
+  "pricing_assumptions": {
+    "interest_rates": {
+      "pricing_rate": 0.035,
+      "guarantee_rate": 0.025,
+      "cash_value_rate": 0.025
+    },
+    "expense_assumptions": {
+      "acquisition_cost_per_policy": 500,
+      "annual_maintenance_cost": 150,
+      "claims_processing_cost": 200
+    },
+    "lapse_assumptions": {
+      "early_lapse_penalty": 0.10,
+      "surrender_charge_years": 10
+    }
+  }
+}

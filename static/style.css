@@ -1,0 +1,469 @@
+/* Professional Insurance Premium Calculator - Styles */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header Styles */
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 30px;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.language-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.btn-language {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-language:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-1px);
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    font-weight: 300;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    font-weight: 300;
+}
+
+/* Form Styles */
+.calculator-form {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    margin-bottom: 30px;
+}
+
+.section {
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.section:last-child {
+    border-bottom: none;
+}
+
+.section h2 {
+    color: #2a5298;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    font-weight: 500;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #e3f2fd;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    align-items: start;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #495057;
+}
+
+.form-group input,
+.form-group select {
+    padding: 12px;
+    border: 2px solid #dee2e6;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #2a5298;
+    box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.1);
+}
+
+/* Checkbox Grid */
+.checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.checkbox-grid label {
+    display: flex;
+    align-items: center;
+    font-weight: normal;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.checkbox-grid label:hover {
+    background-color: #f8f9fa;
+}
+
+.checkbox-grid input[type="checkbox"] {
+    margin-right: 8px;
+    width: auto;
+}
+
+/* Button Styles */
+.form-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 2px solid #e9ecef;
+}
+
+.btn-primary,
+.btn-secondary {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 200px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #2a5298 0%, #1e3c72 100%);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(42, 82, 152, 0.3);
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #5a6268;
+    transform: translateY(-1px);
+}
+
+/* Results Section */
+.results-section {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    margin-bottom: 30px;
+}
+
+.results-section h2 {
+    color: #2a5298;
+    margin-bottom: 30px;
+    font-size: 1.8rem;
+    text-align: center;
+    padding-bottom: 15px;
+    border-bottom: 3px solid #e3f2fd;
+}
+
+/* Quote Summary */
+.quote-summary {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.quote-summary h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.premium-amount {
+    font-size: 3rem;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.coverage-info {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+/* Risk Assessment */
+.risk-assessment {
+    background: #f8f9fa;
+    border-left: 4px solid #ffc107;
+    padding: 25px;
+    margin-bottom: 30px;
+    border-radius: 0 6px 6px 0;
+}
+
+.risk-assessment h3 {
+    color: #856404;
+    margin-bottom: 15px;
+}
+
+.risk-factors {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.risk-factor {
+    background: white;
+    padding: 15px;
+    border-radius: 6px;
+    border-left: 3px solid #ffc107;
+}
+
+/* Premium Breakdown */
+.premium-breakdown {
+    background: #e3f2fd;
+    padding: 25px;
+    border-radius: 6px;
+    margin-bottom: 30px;
+}
+
+.premium-breakdown h3 {
+    color: #1565c0;
+    margin-bottom: 20px;
+}
+
+.breakdown-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.breakdown-table th,
+.breakdown-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #bbdefb;
+}
+
+.breakdown-table th {
+    background: #1976d2;
+    color: white;
+    font-weight: 600;
+}
+
+.breakdown-table tr:nth-child(even) {
+    background: #f3f8ff;
+}
+
+/* Policy Details */
+.policy-details {
+    background: #fff3cd;
+    border-left: 4px solid #ffc107;
+    padding: 25px;
+    margin-bottom: 30px;
+    border-radius: 0 6px 6px 0;
+}
+
+.policy-details h3 {
+    color: #856404;
+    margin-bottom: 15px;
+}
+
+.policy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.policy-item {
+    background: white;
+    padding: 15px;
+    border-radius: 6px;
+}
+
+.policy-item strong {
+    color: #495057;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Underwriter Notes */
+.underwriter-notes {
+    background: #f8f9fa;
+    border: 2px solid #dee2e6;
+    padding: 25px;
+    border-radius: 6px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+
+.underwriter-notes h3 {
+    font-family: 'Segoe UI', sans-serif;
+    color: #495057;
+    margin-bottom: 15px;
+}
+
+/* Loading Indicator */
+.loading {
+    text-align: center;
+    padding: 60px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #e9ecef;
+    border-top: 4px solid #2a5298;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Error Message */
+.error-message {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 20px;
+    border-radius: 6px;
+    border-left: 4px solid #dc3545;
+    margin-bottom: 30px;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 30px;
+    background: #495057;
+    color: white;
+    border-radius: 10px;
+    margin-top: 40px;
+}
+
+.footer p {
+    margin-bottom: 5px;
+    opacity: 0.9;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .header h1 {
+        font-size: 2rem;
+    }
+    
+    .calculator-form,
+    .results-section {
+        padding: 20px;
+    }
+    
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn-primary,
+    .btn-secondary {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .premium-amount {
+        font-size: 2rem;
+    }
+    
+    .checkbox-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .calculator-form,
+    .form-actions,
+    .loading,
+    .error-message {
+        display: none;
+    }
+    
+    .results-section {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+    
+    .header {
+        background: #2a5298 !important;
+        -webkit-print-color-adjust: exact;
+    }
+}

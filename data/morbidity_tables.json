@@ -1,0 +1,113 @@
+{
+  "disability_tables": {
+    "description": "Morbidity rates for disability insurance by occupation class and age",
+    "occupation_classes": {
+      "1": {
+        "name": "Professional - Low Risk",
+        "description": "Accountants, lawyers, doctors, engineers, office workers",
+        "rates": {
+          "25": {"male": 0.0015, "female": 0.0012},
+          "30": {"male": 0.0018, "female": 0.0015},
+          "35": {"male": 0.0022, "female": 0.0018},
+          "40": {"male": 0.0028, "female": 0.0023},
+          "45": {"male": 0.0035, "female": 0.0029},
+          "50": {"male": 0.0045, "female": 0.0037},
+          "55": {"male": 0.0058, "female": 0.0048},
+          "60": {"male": 0.0075, "female": 0.0062},
+          "65": {"male": 0.0098, "female": 0.0081}
+        }
+      },
+      "2": {
+        "name": "Professional - Standard Risk",
+        "description": "Teachers, managers, supervisors, sales representatives",
+        "rates": {
+          "25": {"male": 0.0020, "female": 0.0016},
+          "30": {"male": 0.0024, "female": 0.0020},
+          "35": {"male": 0.0030, "female": 0.0025},
+          "40": {"male": 0.0038, "female": 0.0031},
+          "45": {"male": 0.0048, "female": 0.0040},
+          "50": {"male": 0.0062, "female": 0.0051},
+          "55": {"male": 0.0080, "female": 0.0066},
+          "60": {"male": 0.0104, "female": 0.0086},
+          "65": {"male": 0.0135, "female": 0.0112}
+        }
+      },
+      "3": {
+        "name": "Skilled Manual",
+        "description": "Electricians, plumbers, mechanics, technicians",
+        "rates": {
+          "25": {"male": 0.0030, "female": 0.0025},
+          "30": {"male": 0.0036, "female": 0.0030},
+          "35": {"male": 0.0045, "female": 0.0037},
+          "40": {"male": 0.0057, "female": 0.0047},
+          "45": {"male": 0.0072, "female": 0.0060},
+          "50": {"male": 0.0093, "female": 0.0077},
+          "55": {"male": 0.0120, "female": 0.0099},
+          "60": {"male": 0.0156, "female": 0.0129},
+          "65": {"male": 0.0203, "female": 0.0168}
+        }
+      },
+      "4": {
+        "name": "Heavy Manual",
+        "description": "Construction workers, heavy equipment operators, laborers",
+        "rates": {
+          "25": {"male": 0.0045, "female": 0.0037},
+          "30": {"male": 0.0054, "female": 0.0045},
+          "35": {"male": 0.0067, "female": 0.0056},
+          "40": {"male": 0.0085, "female": 0.0070},
+          "45": {"male": 0.0108, "female": 0.0089},
+          "50": {"male": 0.0139, "female": 0.0115},
+          "55": {"male": 0.0180, "female": 0.0149},
+          "60": {"male": 0.0234, "female": 0.0194},
+          "65": {"male": 0.0304, "female": 0.0252}
+        }
+      }
+    }
+  },
+  "critical_illness_tables": {
+    "description": "Morbidity rates for critical illness coverage",
+    "conditions": {
+      "cancer": {
+        "25": {"male": 0.0008, "female": 0.0012},
+        "30": {"male": 0.0012, "female": 0.0018},
+        "35": {"male": 0.0018, "female": 0.0028},
+        "40": {"male": 0.0028, "female": 0.0042},
+        "45": {"male": 0.0042, "female": 0.0062},
+        "50": {"male": 0.0065, "female": 0.0092},
+        "55": {"male": 0.0098, "female": 0.0132},
+        "60": {"male": 0.0145, "female": 0.0185},
+        "65": {"male": 0.0210, "female": 0.0255}
+      },
+      "heart_disease": {
+        "25": {"male": 0.0005, "female": 0.0003},
+        "30": {"male": 0.0008, "female": 0.0005},
+        "35": {"male": 0.0015, "female": 0.0008},
+        "40": {"male": 0.0028, "female": 0.0015},
+        "45": {"male": 0.0048, "female": 0.0028},
+        "50": {"male": 0.0078, "female": 0.0048},
+        "55": {"male": 0.0125, "female": 0.0078},
+        "60": {"male": 0.0195, "female": 0.0125},
+        "65": {"male": 0.0295, "female": 0.0195}
+      },
+      "stroke": {
+        "25": {"male": 0.0003, "female": 0.0002},
+        "30": {"male": 0.0005, "female": 0.0003},
+        "35": {"male": 0.0008, "female": 0.0005},
+        "40": {"male": 0.0015, "female": 0.0008},
+        "45": {"male": 0.0028, "female": 0.0015},
+        "50": {"male": 0.0048, "female": 0.0028},
+        "55": {"male": 0.0078, "female": 0.0048},
+        "60": {"male": 0.0125, "female": 0.0078},
+        "65": {"male": 0.0195, "female": 0.0125}
+      }
+    }
+  },
+  "waiting_periods": {
+    "disability": {
+      "30_days": {"benefit_percentage": 1.0, "rate_reduction": 0.0},
+      "90_days": {"benefit_percentage": 0.95, "rate_reduction": 0.15},
+      "180_days": {"benefit_percentage": 0.90, "rate_reduction": 0.25},
+      "365_days": {"benefit_percentage": 0.85, "rate_reduction": 0.35}
+    }
+  }
+}
